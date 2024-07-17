@@ -1,0 +1,102 @@
+/* --- App --- */
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+} 
+#app{
+    min-height: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    /* Define color system */
+    --white-color: 255, 255, 255; /* #FFFFFF */
+    --blue-color: 86, 83, 181; /* #5653B5 */
+    --green-color: 135, 215, 73; /* #87D749 */
+    --red-color: 215, 99, 73; /* #D76349 */
+    --orange-color: 255, 194, 93; /* #FFC25D */
+    --grey-color: 199, 199, 199; /* #C7C7C7 */
+    --grey-light-color: 244, 244, 244; /* #f4f4f4 */
+    --background-grey-color: 74, 73, 108; /* #4A496C */
+}
+main{
+    overflow-y: auto;
+    padding: 16px 24px;
+}
+/* --- Text --- */
+.title{
+    font-size: 32px;
+    font-weight: 400;
+}
+.subtitle{
+    font-size: 24px;
+    font-weight: 400;
+}
+.text{
+    font-size: 16px;
+    font-weight: 400;
+}
+.subtext{
+    font-size: 12px;
+    font-weight: 400;
+}
+.txtCut{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/* Color text */
+.text-grey{
+    color: rgba(var(--grey-color));
+}
+.text-blue{
+    color: rgba(var(--blue-color));
+}
+.text-red{
+    color: rgba(var(--red-color));
+}
+.text-green{
+    color: rgba(var(--green-color));
+}
+.text-orange{
+    color: rgba(var(--orange-color));
+}
+/* Custom CSS */
+.linkAsBtn{
+    transition: all 0.15s ease-in-out;
+    background-color: rgba(var(--blue-color));
+    box-shadow: 0px 0px 5px 2px rgba(var(--blue-color), 0.5);
+    border: none;
+    display: inline-block;
+    height: 48px;
+    padding: 11px 24px;
+    border-radius: 5px;
+    color: rgba(var(--white-color))!important;
+    text-decoration: none;
+}
+.linkAsBtn:hover{
+    color: white;
+    background-color: rgba(var(--blue-color), 0.7);
+}
+
+/* Toast */
+.Vue-Toastification__toast{
+    font-family: 'Poppins', sans-serif!important;
+}
+.Vue-Toastification__toast--info {
+    background-color: #5653B5!important;
+}
+.Vue-Toastification__toast--success {
+    background-color: #87D749!important;
+}
+.Vue-Toastification__toast--error {
+    background-color: #D76349!important;
+}
+.Vue-Toastification__toast--warning {
+    background-color: #FFC25D!important;
+}
