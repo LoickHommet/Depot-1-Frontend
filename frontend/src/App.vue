@@ -4,14 +4,15 @@
     <Aside />
     <div class="container-custom">
     <Header />
+    <RouterView />
     </div>
-    <router-view />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Aside from './components/Aside.vue';
+import { RouterView } from 'vue-router';
 
 export default {
   name: 'App',
