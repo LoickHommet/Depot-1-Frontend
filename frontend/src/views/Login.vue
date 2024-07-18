@@ -1,6 +1,54 @@
 
 <script setup>
+import Button from '../components/Button.vue';
+import { useRouter } from "vue-router";
+import { useAuthService } from '../services/authService';
+import Joi from "joi";
+import { ref } from "vue";
 
+const { connect } = useAuthService();
+const router = useRouter();
+
+const email = ref("");
+const password = ref("");
+const errorEmail = ref('');
+const errorPassword = ref('');
+
+async function connexion() {
+  // Réinitialisez les erreurs
+  errorEmail.value = '';
+  errorPassword.value = '';
+
+  // Validation des champs avec Joi (exemple)
+  const schema = Joi.object({
+    email: Joi.string().email({ tlds: { allow: false } }).required(),
+    password: Joi.string().min(6).required()
+  });
+
+  const { error } = schema.validate({ email: email.value, password: password.value });
+
+  if (error) {
+    // Gestion des erreurs de validation
+    if (error.details.find(detail => detail.path[0] === 'email')) {
+      errorEmail.value = 'Adresse email invalide';
+    }
+    if (error.details.find(detail => detail.path[0] === 'password')) {
+      errorPassword.value = 'Le mot de passe doit faire au moins 6 caractères';
+    }
+    return;
+  }
+
+  try {
+    // Appel à la fonction connect du service authService
+    await connect(email.value, password.value);
+    // Navigation vers une autre page après connexion réussie
+    console.log('Connexion réussie');
+    router.push('/dashboard');
+  } catch (error) {
+
+    console.error('Erreur lors de la connexion:', error);
+  }
+}
 </script>
 <template>
   <main class="container-fluid">
