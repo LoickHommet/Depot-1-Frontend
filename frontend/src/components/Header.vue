@@ -1,14 +1,18 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useAuthService } from '../services/authService';
+
+const {auth} = useAuthService();
 </script>
 
 <template>
     <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <RouterLink class="brand title" to="/">BudgetVue</RouterLink>
-        <RouterLink class="profil-link px-3 py-2">Profil</RouterLink>
-        <RouterLink class="ms-auto me-2 linkAsBtn" to="/login">Connexion</RouterLink>
-        <RouterLink  class="linkAsBtn" to="/register">Inscription</RouterLink>
+        <RouterLink v-if="auth" class="profil-link px-3 py-2">Profil</RouterLink>
+        <RouterLink v-if="!auth" class="ms-auto me-2 linkAsBtn" to="/login">Connexion</RouterLink>
+        <RouterLink v-if="!auth" class="linkAsBtn" to="/register">Inscription</RouterLink>
+        
     </div>
 </nav>
 </template>
