@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-
+import { useAuthService } from '../services/authService';
+const {auth, disconnect} = useAuthService();
+import Button from './Button.vue';
 </script>
 
 <template>
@@ -11,10 +13,13 @@ import { RouterLink } from 'vue-router';
                     <RouterLink to="/" data-test-id="accueilAside">Accueil</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink to="/Bord" data-test-id="BordAside">Bord</RouterLink>
+                    <RouterLink v-if="auth" to="/Bord" data-test-id="BordAside">Bord</RouterLink>
                 </li>
             </ul>
         </nav>
+        <div class="mt-auto mb-4 text-center">
+            <Button v-if="auth" :text="'Déconnexion'" :color="'red'" @click="disconnect()" data-test-id="deconnexion"/>
+        </div>
     </aside>
 </template>
 
