@@ -90,6 +90,7 @@ const inscription = async () => {
     axios.defaults.withCredentials = true;
 
     const response = await axios.post('http://localhost/api/register', value);
+    router.push('/login');
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);
   }
