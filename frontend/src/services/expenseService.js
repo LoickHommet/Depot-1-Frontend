@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthService } from './authService.js';
+import { useAuthService } from "./authService.js";
 
 const { auth } = useAuthService();
 const base_url = "http://localhost";
@@ -39,7 +39,6 @@ function useExpenseService() {
       console.error("Erreur lors de la suppression de la dépense:", error);
     }
   }
-
   function groupExpensesByMonth() {
     groupedExpenses.value = expenses.value.reduce((acc, expense) => {
       const month = new Date(expense.date).toLocaleString("default", {
@@ -47,12 +46,17 @@ function useExpenseService() {
         year: "numeric",
       });
       if (!acc[month]) {
-        acc[month] = [];
+        acc[month] = {
+          total: 0,
+          expenses: [],
+        };
       }
-      acc[month].push(expense);
+      acc[month].expenses.push(expense);
+      acc[month].total += parseFloat(expense.amount); 
       return acc;
     }, {});
   }
+  
 
   async function addExpense(expense) {
     try {

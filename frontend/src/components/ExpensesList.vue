@@ -11,12 +11,20 @@ function confirmDelete(id) {
     }
 }
 
+function formatMonth(month) {
+  return month
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 onMounted(fetchExpenses);
 </script>
 
 <template>
     <div>
         <div class="filters">
+            <label for="category-filter">Filtrer par catégorie:</label>
             <Select v-model="selectedCategory" @change="fetchExpenses">
                 <option value="">Toutes les catégories</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -25,11 +33,12 @@ onMounted(fetchExpenses);
             </Select>
         </div>
         <div class="expenses">
-            <div v-for="(expenses, month) in groupedExpenses" :key="month" class="month-group">
+            <div v-for="(monthData, month) in groupedExpenses" :key="month" class="month-group">
                 <div class="card-month">
-                    <h2>{{ month }}</h2>
+                    <span class="month">{{ formatMonth(month) }}</span>
+                    <span class="total">Total: {{ monthData.total.toFixed(2) }} €</span>
                 </div>
-                <div v-for="expense in expenses" :key="expense.id" class="expense-card">
+                <div v-for="expense in monthData.expenses" :key="expense.id" class="expense-card">
                     <div class="card-content">
                         <p>Montant: {{ expense.amount }} €</p>
                         <p>Catégorie: {{ expense.category }}</p>
@@ -44,7 +53,6 @@ onMounted(fetchExpenses);
         </div>
     </div>
 </template>
-
 
 
 <style scoped>
@@ -70,12 +78,27 @@ onMounted(fetchExpenses);
     margin-bottom: 10px;
     border-radius: 5px;
 }
+
 .card-month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: rgba(217, 176, 176, 0.448);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
+}
+
+.card-month .month {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.card-month .total {
+    font-size: 0.9em;
+    font-weight: normal;
+    color: #555;
 }
 
 .card-content {
