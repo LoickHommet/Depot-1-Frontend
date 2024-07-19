@@ -4,6 +4,9 @@ import Register from '../views/Register.vue';
 import Login from '../views/Login.vue';
 import Dashboard from '../views/Dashboard.vue';
 import AddExpense from '../views/AddExpense.vue';
+import ExpensesList from '../views/ExpensesList.vue';
+
+
 
 
 
@@ -32,6 +35,11 @@ const routes = [
     path: '/addExpense',
     name: 'AddExpense',
     component: AddExpense,
+  },
+    {
+    path: '/expensesList',
+    name: 'ExpensesList',
+    component: ExpensesList,
   },
 ];
 
