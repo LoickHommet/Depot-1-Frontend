@@ -1,7 +1,9 @@
 import axios from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useAuthService } from './authService.js';
 
+const { auth } = useAuthService();
 const base_url = "http://localhost";
 
 function useExpenseService() {
@@ -15,17 +17,26 @@ function useExpenseService() {
     try {
       const response = await axios.get(`${base_url}/api/expenses`, {
         params: {
+          user_id: auth.value.id,
           category: selectedCategory.value,
         },
       });
       expenses.value = response.data;
       groupExpensesByMonth();
 
-      // Fetch unique categories for the filter
       const categoriesResponse = await axios.get(`${base_url}/api/categories`);
       categories.value = categoriesResponse.data;
     } catch (error) {
       console.error("Erreur lors de la récupération des dépenses:", error);
+    }
+  }
+
+  async function deleteExpense(id) {
+    try {
+      await axios.delete(`${base_url}/api/expenses/delete/${id}`);
+      await fetchExpenses(); // Refresh the list after deletion
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la dépense:", error);
     }
   }
 
@@ -59,7 +70,7 @@ function useExpenseService() {
     groupedExpenses,
     fetchExpenses,
     addExpense,
-
+    deleteExpense,
   };
 }
 
