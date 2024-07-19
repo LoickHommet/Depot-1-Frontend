@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { useExpenseService } from '../services/expenseService.js';
+import Select from '../components/Select.vue';
 
 const { expenses, categories, selectedCategory, groupedExpenses, fetchExpenses, viewDetails, editExpense, deleteExpense } = useExpenseService();
 
@@ -16,18 +17,18 @@ onMounted(fetchExpenses);
 <template>
     <div>
         <div class="filters">
-            <label for="category-filter">Filtrer par catégorie:</label>
-            <select v-model="selectedCategory" @change="fetchExpenses">
+            <Select v-model="selectedCategory" @change="fetchExpenses">
                 <option value="">Toutes les catégories</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">
                     {{ category.name }}
                 </option>
-            </select>
+            </Select>
         </div>
         <div class="expenses">
             <div v-for="(expenses, month) in groupedExpenses" :key="month" class="month-group">
-                
-                <div class="card-month"><h2>{{ month }}</h2></div>
+                <div class="card-month">
+                    <h2>{{ month }}</h2>
+                </div>
                 <div v-for="expense in expenses" :key="expense.id" class="expense-card">
                     <div class="card-content">
                         <p>Montant: {{ expense.amount }} €</p>
@@ -69,8 +70,8 @@ onMounted(fetchExpenses);
     margin-bottom: 10px;
     border-radius: 5px;
 }
-.expense-month {
-    background: rgba(255, 255, 255, 0.448);
+.card-month {
+    background: rgba(217, 176, 176, 0.448);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-bottom: 10px;
