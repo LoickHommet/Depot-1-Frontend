@@ -13,7 +13,7 @@ function useAuthService() {
         email,
         password,
       });
-      auth.value = response.data;
+      auth.value = response.data.user;
       return response.data; 
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);

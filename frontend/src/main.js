@@ -8,7 +8,7 @@ const app = createApp(App);
 app.use(router);
 app.mount('#app');
 
-axios.defaults.baseURL = 'http://localhost/api/register'; 
+axios.defaults.baseURL = 'http://localhost/api'; 
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
