@@ -2,13 +2,6 @@
 import ExpenseForm from '../components/ExpenseForm.vue';
 </script>
 
-<style scoped>
-.title {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-</style>
-
 
 <template>
     <main class="container-fluid">
@@ -20,3 +13,11 @@ import ExpenseForm from '../components/ExpenseForm.vue';
         </div>
     </main>
 </template>
+
+
+<style scoped>
+.title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+</style>

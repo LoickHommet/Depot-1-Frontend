@@ -1,4 +1,3 @@
-
 <script setup>
 import ExpensesList from '../components/ExpensesList.vue';
 </script>
@@ -6,22 +5,10 @@ import ExpensesList from '../components/ExpensesList.vue';
 
 
 <template>
-  <div class="expenses-list-page">
-    <h1>Liste des Dépenses</h1>
-    <ExpensesList />
-  </div>
+  <main class="container-fluid">
+    <div class="row justify-content-center">
+      <h1 class="title mb-0 my-5">Liste des Dépenses</h1>
+      <ExpensesList />
+    </div>
+  </main>
 </template>
-
-
-
-<style scoped>
-.expenses-list-page {
-  padding: 20px;
-}
-
-h1 {
-  margin-bottom: 20px;
-  font-size: 2em;
-  font-weight: bold;
-}
-</style>
