@@ -32,17 +32,6 @@ function useExpenseService() {
     }
   }
 
-
-
-  async function deleteExpense(id) {
-    try {
-      await axios.delete(`${base_url}/api/expenses/delete/${id}`);
-      await fetchExpenses(); // Refresh the list after deletion
-    } catch (error) {
-      console.error("Erreur lors de la suppression de la dépense:", error);
-    }
-  }
-
   async function fetchExpenseDetails(id) {
     try {
       const response = await axios.get(`${base_url}/api/expenses/${id}`);
@@ -54,6 +43,17 @@ function useExpenseService() {
       );
     }
   }
+
+
+  async function deleteExpense(id) {
+    try {
+      await axios.delete(`${base_url}/api/expenses/delete/${id}`);
+      await fetchExpenses(); // Refresh the list after deletion
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la dépense:", error);
+    }
+  }
+
 
   function groupExpensesByMonth() {
     groupedExpenses.value = expenses.value.reduce((acc, expense) => {
@@ -82,6 +82,15 @@ function useExpenseService() {
     }
   }
 
+  async function updateExpense(expense) {
+    try {
+      await axios.put(`${base_url}/api/expenses/edit/${expense.id}`, expense);
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour de la dépense:", error);
+      throw error;
+    }
+  }
+
   return {
     expenses,
     expenseDetails,
@@ -91,6 +100,7 @@ function useExpenseService() {
     fetchExpenses,
     fetchExpenseDetails,
     addExpense,
+    updateExpense,
     deleteExpense,
   };
 }
