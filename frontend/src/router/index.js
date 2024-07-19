@@ -6,6 +6,7 @@ import Dashboard from '../views/Dashboard.vue';
 import AddExpense from '../views/AddExpense.vue';
 import ExpensesList from '../views/ExpensesList.vue';
 import ExpenseDetails from '../views/ExpenseDetails.vue';
+import EditExpense from '../views/EditExpense.vue';
 
 
 
@@ -46,6 +47,11 @@ const routes = [
     path: '/details/:id',
     name: 'ExpenseDetails',
     component: ExpenseDetails,
+  },
+    {
+    path: '/edit-expense/:id',
+    name: 'EditExpense',
+    component: EditExpense,
   },
 ];
 
