@@ -2,6 +2,8 @@
 import { onMounted } from 'vue';
 import { useExpenseService } from '../services/expenseService.js';
 import Select from '../components/Select.vue';
+import { RouterLink } from 'vue-router';
+
 
 const { expenses, categories, selectedCategory, groupedExpenses, fetchExpenses, viewDetails, editExpense, deleteExpense } = useExpenseService();
 
@@ -10,6 +12,7 @@ function confirmDelete(id) {
         deleteExpense(id);
     }
 }
+
 
 function formatMonth(month) {
   return month
@@ -24,7 +27,6 @@ onMounted(fetchExpenses);
 <template>
     <div>
         <div class="filters">
-            <label for="category-filter">Filtrer par catégorie:</label>
             <Select v-model="selectedCategory" @change="fetchExpenses">
                 <option value="">Toutes les catégories</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">
@@ -43,8 +45,8 @@ onMounted(fetchExpenses);
                         <p>Montant: {{ expense.amount }} €</p>
                         <p>Catégorie: {{ expense.category }}</p>
                         <div class="actions">
-                            <button @click="viewDetails(expense)">🔍</button>
-                            <button @click="editExpense(expense)">✏️</button>
+                            <RouterLink :to="`/details/${expense.id}`" class="action-link">🔍</RouterLink>
+                            <button @click="editExpense(expense.id)">✏️</button>
                             <button @click="confirmDelete(expense.id)">🗑️</button>
                         </div>
                     </div>

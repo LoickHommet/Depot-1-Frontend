@@ -5,6 +5,7 @@ import Login from '../views/Login.vue';
 import Dashboard from '../views/Dashboard.vue';
 import AddExpense from '../views/AddExpense.vue';
 import ExpensesList from '../views/ExpensesList.vue';
+import ExpenseDetails from '../views/ExpenseDetails.vue';
 
 
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/expensesList',
     name: 'ExpensesList',
     component: ExpensesList,
+  },
+    {
+    path: '/details/:id',
+    name: 'ExpenseDetails',
+    component: ExpenseDetails,
   },
 ];
 
