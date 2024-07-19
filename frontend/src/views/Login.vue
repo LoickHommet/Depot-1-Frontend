@@ -39,10 +39,7 @@ async function connexion() {
   }
 
   try {
-    // Appel à la fonction connect du service authService
     await connect(email.value, password.value);
-    // Navigation vers une autre page après connexion réussie
-    console.log('Connexion réussie');
     router.push('/dashboard');
   } catch (error) {
 

@@ -19,8 +19,6 @@ async function submitForm() {
 
     try {
 
-        console.log('Auth Value:', auth.value); // Log auth.value to see its content
-
         if (!auth.value || !auth.value.id) {
             console.error("Utilisateur non authentifié ou ID utilisateur manquant");
             return;
