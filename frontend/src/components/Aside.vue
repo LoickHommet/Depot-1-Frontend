@@ -16,6 +16,9 @@ import Button from './Button.vue';
                     <RouterLink  to="/dashboard" data-test-id="BordAside">Dashboard</RouterLink>
                 </li>
                 <li class="nav-item">
+                    <RouterLink  to="/expensesList" data-test-id="BordAside">ExpensesList</RouterLink>
+                </li>
+                <li class="nav-item">
                     <RouterLink  to="/addExpense" data-test-id="BordAside">AddExpense</RouterLink>
                 </li>
             </ul>
