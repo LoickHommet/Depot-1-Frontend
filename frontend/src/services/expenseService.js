@@ -12,6 +12,7 @@ function useExpenseService() {
   const categories = ref([]);
   const selectedCategory = ref("");
   const groupedExpenses = ref({});
+  const expenseDetails = ref(null);
 
   async function fetchExpenses() {
     try {
@@ -31,6 +32,8 @@ function useExpenseService() {
     }
   }
 
+
+
   async function deleteExpense(id) {
     try {
       await axios.delete(`${base_url}/api/expenses/delete/${id}`);
@@ -39,6 +42,19 @@ function useExpenseService() {
       console.error("Erreur lors de la suppression de la dépense:", error);
     }
   }
+
+  async function fetchExpenseDetails(id) {
+    try {
+      const response = await axios.get(`${base_url}/api/expenses/${id}`);
+      expenseDetails.value = response.data;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des détails de la dépense:",
+        error
+      );
+    }
+  }
+
   function groupExpensesByMonth() {
     groupedExpenses.value = expenses.value.reduce((acc, expense) => {
       const month = new Date(expense.date).toLocaleString("default", {
@@ -52,11 +68,10 @@ function useExpenseService() {
         };
       }
       acc[month].expenses.push(expense);
-      acc[month].total += parseFloat(expense.amount); 
+      acc[month].total += parseFloat(expense.amount);
       return acc;
     }, {});
   }
-  
 
   async function addExpense(expense) {
     try {
@@ -69,10 +84,12 @@ function useExpenseService() {
 
   return {
     expenses,
+    expenseDetails,
     categories,
     selectedCategory,
     groupedExpenses,
     fetchExpenses,
+    fetchExpenseDetails,
     addExpense,
     deleteExpense,
   };
