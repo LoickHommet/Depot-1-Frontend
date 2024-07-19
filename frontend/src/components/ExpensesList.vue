@@ -46,7 +46,7 @@ onMounted(fetchExpenses);
                         <p>Catégorie: {{ expense.category }}</p>
                         <div class="actions">
                             <RouterLink :to="`/details/${expense.id}`" class="action-link">🔍</RouterLink>
-                            <button @click="editExpense(expense.id)">✏️</button>
+                            <RouterLink :to="`/edit-expense/${expense.id}`" class="action-link">✏️</RouterLink>
                             <button @click="confirmDelete(expense.id)">🗑️</button>
                         </div>
                     </div>
