@@ -13,7 +13,10 @@ import Button from './Button.vue';
                     <RouterLink to="/" data-test-id="accueilAside">Accueil</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink v-if="auth" to="/Bord" data-test-id="BordAside">Bord</RouterLink>
+                    <RouterLink  to="/dashboard" data-test-id="BordAside">Dashboard</RouterLink>
+                </li>
+                <li class="nav-item">
+                    <RouterLink  to="/addExpense" data-test-id="BordAside">AddExpense</RouterLink>
                 </li>
             </ul>
         </nav>
