@@ -51,12 +51,12 @@ const chartOptions = ref({
 const { fetchMonthlyExpenses } = useExpenseService();
 
 const chartData = ref({
-    labels: [], // Initialiser les labels
+    labels: [], 
     datasets: [
         {
-            label: 'Dépenses Mensuelles',
+            label: 'Dépenses Mensuelles', 
             backgroundColor: '#42A5F5',
-            data: [] // Initialiser les données
+            data: [] // Les données seront mises à jour dynamiquement
         }
     ]
 });
@@ -72,9 +72,6 @@ async function updateMonthlyData() {
         const labels = data.map(expense => monthNames[expense.month - 1]);
         const chartDataValues = data.map(expense => parseFloat(expense.total)); // Convertir les totaux en nombres
 
-        console.log("Labels:", labels);
-        console.log("Chart Data Values:", chartDataValues);
-
         // Initialiser et mettre à jour les données du graphique
         chartData.value = {
             labels: labels,
@@ -86,8 +83,6 @@ async function updateMonthlyData() {
                 }
             ]
         };
-
-        console.log("Updated Chart Data:", chartData.value);
 
         // Forcer la mise à jour du graphique
         if (chartRef.value && chartRef.value.chartInstance) {
@@ -103,7 +98,6 @@ onMounted(() => {
 });
 
 watch(chartData, (newVal) => {
-    console.log("Chart Data Changed:", newVal);
     if (chartRef.value && chartRef.value.chartInstance) {
         chartRef.value.chartInstance.update(); // Forcer la mise à jour
     }

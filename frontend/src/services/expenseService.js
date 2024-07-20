@@ -62,7 +62,7 @@ function useExpenseService() {
           user_id: auth.value.id,
         },
       });
-      console.log("Response data:", response.data); // Affichez les données retournées par l'API
+
       return response.data;
     } catch (error) {
       console.error(
