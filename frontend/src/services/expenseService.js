@@ -55,6 +55,42 @@ function useExpenseService() {
     }
   }
 
+  async function fetchMonthlyExpenses() {
+    try {
+      const response = await axios.get(`${base_url}/api/monthly`, {
+        params: {
+          user_id: auth.value.id,
+        },
+      });
+      console.log("Response data:", response.data); // Affichez les données retournées par l'API
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des dépenses mensuelles:",
+        error
+      );
+    }
+  }
+
+  async function fetchCategoryExpenses() {
+    try {
+      const response = await axios.get(
+        `${base_url}/api/category-expenses`,
+        {
+          params: {
+            user_id: auth.value.id,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération des dépenses par catégorie:",
+        error
+      );
+      throw error;
+    }
+  }
 
   async function deleteExpense(id) {
     try {
@@ -64,7 +100,6 @@ function useExpenseService() {
       console.error("Erreur lors de la suppression de la dépense:", error);
     }
   }
-
 
   function groupExpensesByMonth() {
     groupedExpenses.value = expenses.value.reduce((acc, expense) => {
@@ -111,6 +146,8 @@ function useExpenseService() {
     fetchExpenses,
     fetchExpenseDetails,
     fetchCategories,
+    fetchMonthlyExpenses,
+    fetchCategoryExpenses,
     addExpense,
     updateExpense,
     deleteExpense,
