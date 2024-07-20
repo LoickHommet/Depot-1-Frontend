@@ -22,12 +22,10 @@ onMounted(async () => {
     console.log('onMounted called');  // Ajoutez ce log pour vérifier l'appel de onMounted
     await fetchCategories();
     await fetchExpenses();
-    console.log('Categories after fetchCategories:', categories.value);  // Ajoutez ce log pour vérifier les catégories après le fetch
 });
 
 // Ajoutez des logs pour le watcher
 watch(selectedCategory, async () => {
-    console.log('selectedCategory changed:', selectedCategory.value);  // Ajoutez ce log pour vérifier la catégorie sélectionnée
     await fetchExpenses();
 });
 </script>
