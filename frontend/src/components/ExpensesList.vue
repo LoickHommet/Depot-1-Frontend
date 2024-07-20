@@ -1,11 +1,9 @@
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useExpenseService } from '../services/expenseService.js';
-import Select from '../components/Select.vue';
 import { RouterLink } from 'vue-router';
 
-
-const { expenses, categories, selectedCategory, groupedExpenses, fetchExpenses, viewDetails, editExpense, deleteExpense } = useExpenseService();
+const { fetchCategories, categories, selectedCategory, groupedExpenses, fetchExpenses, viewDetails, editExpense, deleteExpense } = useExpenseService();
 
 function confirmDelete(id) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette dépense ?')) {
@@ -13,26 +11,36 @@ function confirmDelete(id) {
     }
 }
 
-
 function formatMonth(month) {
-  return month
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    return month
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
 }
 
-onMounted(fetchExpenses);
+onMounted(async () => {
+    console.log('onMounted called');  // Ajoutez ce log pour vérifier l'appel de onMounted
+    await fetchCategories();
+    await fetchExpenses();
+    console.log('Categories after fetchCategories:', categories.value);  // Ajoutez ce log pour vérifier les catégories après le fetch
+});
+
+// Ajoutez des logs pour le watcher
+watch(selectedCategory, async () => {
+    console.log('selectedCategory changed:', selectedCategory.value);  // Ajoutez ce log pour vérifier la catégorie sélectionnée
+    await fetchExpenses();
+});
 </script>
 
 <template>
     <div>
         <div class="filters">
-            <Select v-model="selectedCategory" @change="fetchExpenses">
-                <option value="">Toutes les catégories</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">
-                    {{ category.name }}
+            <select v-model="selectedCategory">
+                <option value="">Toutes les catégories </option>
+                <option v-for="category in categories" :key="category" :value="category">
+                    {{ category }}
                 </option>
-            </Select>
+            </select>
         </div>
         <div class="expenses">
             <div v-for="(monthData, month) in groupedExpenses" :key="month" class="month-group">
@@ -55,7 +63,6 @@ onMounted(fetchExpenses);
         </div>
     </div>
 </template>
-
 
 <style scoped>
 .filters {
@@ -100,7 +107,7 @@ onMounted(fetchExpenses);
 .card-month .total {
     font-size: 0.9em;
     font-weight: normal;
-    color: #555;
+    color: #555; 
 }
 
 .card-content {
@@ -114,5 +121,30 @@ onMounted(fetchExpenses);
     border: none;
     cursor: pointer;
     font-size: 1.2em;
+}
+select{
+    transition: all 0.15s ease-in-out;
+    border-radius: 5px;
+    height: 48px;
+    padding: 10px 16px;
+    background-color: unset;
+    border: 1px solid rgba(var(--grey-color));
+    box-shadow: 0px 0px 5px 2px rgba(var(--grey-color), 0.5);
+    font-family: 'Poppins', sans-serif;
+}
+select:hover{
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0px 0px 5px 2px rgba(var(--blue-color), 0.4);
+}
+select.error{
+    border: 1px solid rgba(var(--red-color));
+    box-shadow: 0px 0px 5px 2px rgba(var(--red-color), 0.5);
+}
+select.error:hover{
+    outline: 3px solid rgba(var(--red-color), 0.6);
+}
+option{
+    transition: all 0.15s ease-in-out;
+    background-color: rgba(var(--white-color));
 }
 </style>
