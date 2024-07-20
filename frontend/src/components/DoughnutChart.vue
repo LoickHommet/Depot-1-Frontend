@@ -106,7 +106,7 @@ watch(chartData, (newVal) => {
 <style scoped>
 .chart-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 350px;
   margin: 0 auto;
 }
 </style>
