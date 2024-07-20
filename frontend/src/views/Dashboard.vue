@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div class="dashboard-container">
     <div class="top-bar">
-        <RouterLink  to="/addExpense" class="boutonDashboard" data-test-id="BordAside">Voir la liste des dépenses</RouterLink>
+        <RouterLink  to="/expensesList" class="boutonDashboard" data-test-id="BordAside">Voir la liste des dépenses</RouterLink>
         <RouterLink  to="/addExpense" class="boutonDashboard" data-test-id="BordAside">Ajouter une dépense</RouterLink>
     </div>
     <div class="cards-container">
