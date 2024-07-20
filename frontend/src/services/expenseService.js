@@ -24,9 +24,6 @@ function useExpenseService() {
       });
       expenses.value = response.data;
       groupExpensesByMonth();
-
-      const categoriesResponse = await axios.get(`${base_url}/api/categories`);
-      categories.value = categoriesResponse.data;
     } catch (error) {
       console.error("Erreur lors de la récupération des dépenses:", error);
     }
@@ -41,6 +38,20 @@ function useExpenseService() {
         "Erreur lors de la récupération des détails de la dépense:",
         error
       );
+    }
+  }
+
+  async function fetchCategories() {
+    try {
+      const response = await axios.get(`${base_url}/api/expenses/categories`, {
+        params: {
+          user_id: auth.value.id,
+        },
+      });
+      categories.value = response.data;
+      console.log(categories.value);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des catégories:", error);
     }
   }
 
@@ -99,6 +110,7 @@ function useExpenseService() {
     groupedExpenses,
     fetchExpenses,
     fetchExpenseDetails,
+    fetchCategories,
     addExpense,
     updateExpense,
     deleteExpense,
