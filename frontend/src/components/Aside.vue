@@ -1,8 +1,20 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useAuthService } from '../services/authService';
-const {auth, disconnect} = useAuthService();
+import { useRouter } from 'vue-router';
 import Button from './Button.vue';
+
+const {auth, disconnect} = useAuthService();
+const router = useRouter();
+
+async function logout() {
+    try {
+        await disconnect(); 
+        router.push('/'); 
+    } catch (error) {
+        console.error("Erreur lors de la déconnexion:", error);
+    }
+}
 </script>
 
 <template>
@@ -24,7 +36,7 @@ import Button from './Button.vue';
             </ul>
         </nav>
         <div class="mt-auto mb-4 text-center">
-            <Button v-if="auth" :text="'Déconnexion'" :color="'red'" @click="disconnect()" data-test-id="deconnexion"/>
+            <Button v-if="auth" :text="'Déconnexion'" :color="'red'" @click="logout()" data-test-id="deconnexion"/>
         </div>
     </aside>
 </template>
