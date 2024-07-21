@@ -5,7 +5,7 @@
       <p>Gérez vos dépenses efficacement et visualisez vos données financières en un coup d'œil.</p>
     </div>
 
-    <div class="statistics-section">
+    <div class="statistics-section" v-if="auth">
       <h2>Statistiques Résumées</h2>
       <div class="statistics-cards">
         <div class="stat-card">

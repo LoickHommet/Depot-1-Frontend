@@ -1,8 +1,6 @@
 import axios from "axios";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 
-const router = useRouter();
 const base_url = "http://localhost";
 const auth = ref(null);
 
@@ -25,7 +23,6 @@ function useAuthService() {
     try {
       await axios.post(`${base_url}/api/logout`);
       auth.value = null; // Réinitialisation de l'authentification côté client
-      router.push('/');
     } catch (error) {
       console.error("Erreur lors de la déconnexion:", error);
       throw error;
