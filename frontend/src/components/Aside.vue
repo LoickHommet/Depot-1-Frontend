@@ -13,13 +13,13 @@ import Button from './Button.vue';
                     <RouterLink to="/" data-test-id="accueilAside">Accueil</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink  to="/dashboard" data-test-id="BordAside">Dashboard</RouterLink>
+                    <RouterLink  to="/dashboard" v-if="auth" data-test-id="BordAside">Dashboard</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink  to="/expensesList" data-test-id="BordAside">ExpensesList</RouterLink>
+                    <RouterLink  to="/expensesList" v-if="auth" data-test-id="BordAside">Liste des dépenses</RouterLink>
                 </li>
                 <li class="nav-item">
-                    <RouterLink  to="/addExpense" data-test-id="BordAside">AddExpense</RouterLink>
+                    <RouterLink  to="/addExpense" v-if="auth" data-test-id="BordAside">Ajouter une dépense</RouterLink>
                 </li>
             </ul>
         </nav>
